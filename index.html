@@ -143,29 +143,31 @@
         <h2 class="heading">Projects</h2>
         <div class="container">
             <div class="row">
-                    <div class="project shadow-large">
+
+                    <div id="repo"></div>
+                    <!-- <div class="project shadow-large">
                         <div class="project-image">
                             <img src="images/ip-location.jpg" />
                         </div>
-                        <!-- End .project-image -->
+                        <! End .project-image 
                         <div class="project-info">
-                            <h3>WordPress Plugin For IP Location Redirect</h3>
-                            <p>
+                            <h3 id="title">WordPress Plugin For IP Location Redirect</h3>
+                            <p id="description">
                                 This plugin detects country of the user and redirects to the particular country website.<br />
 
                                 <b>Note</b> - This is not an automated plugin, it is made for the developer by the developer, so you have to edit it with your text editor according to your needs!, Don't blame me for your mistakes then!
                             </p>
-                            <a href="https://github.com/abhishekdhapare9392/WordPress-IP-Location-Redirect" class="btn-rounded-blue">View Project</a>
+                            <a href="" id="link" class="btn-rounded-blue">View Project</a>
                         </div>
-                        <!-- End .project-info -->
-                    </div>
-                <!-- End .project -->
+                        <! End .project-info 
+                    </div> -->
+                <!-- End .project 
 
                     <div class="project shadow-large">
                         <div class="project-image">
                             <img src="images/mylogin.jpg" />
                         </div>
-                        <!-- End .project-image -->
+                        <! End .project-image 
                         <div class="project-info">
                             <h3>My Login - CakePHP Template</h3>
                             <p>
@@ -174,14 +176,14 @@
                             </p>
                             <a href="https://github.com/abhishekdhapare9392/mylogin-CakePHP" class="btn-rounded-blue">View Project</a>
                         </div>
-                        <!-- End .project-info -->
+                        <! End .project-info
                     </div>
-                <!-- End .project -->
+                <! End .project 
                 <div class="project shadow-large">
                         <div class="project-image">
                             <img src="images/myblog.jpg" />
                         </div>
-                        <!-- End .project-image -->
+                        <! End .project-image 
                         <div class="project-info">
                             <h3>Blog - Abhishek Dhapare - Framework7 & AngularJs</h3>
                             <p>
@@ -190,9 +192,9 @@
                             </p>
                             <a href="https://github.com/abhishekdhapare9392/myblogapp-framework7-angulajs" class="btn-rounded-blue">View Project</a>
                         </div>
-                        <!-- End .project-info -->
+                        <! End .project-info 
                     </div>
-                <!-- End .project -->
+                 End .project -->
             </div>
         </div>
     </div>
@@ -278,6 +280,37 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/scripts.min.js"></script>
+    <script>
+        var username = "abhishekdhapare9392";
+    console.log(username);
+    $.ajax({
+        url: "https://api.github.com/users/" + username + "/repos",
+        type: "GET",
+        headers: {
+            "content-type": "application/json"
+        },
+        success: function(data){
+            var repository = data;
+
+            var str = "";
+
+            for(i = 0; i< repository.length; i++){
+                //console.log(repository[i].name);
+                //$("#title").innerHTML = repository[i].name;
+
+                str += '<div class="col-md-4 bg-cover">' +
+                            '<h3>' + repository[i].name + '</h3>' +
+                            '<p>' + repository[i].description + '</p>' +
+                            '<a href="' + repository[i].html_url +' target="_blank" " id="link" class="btn-rounded-blue">View Project</a>' +
+                        '</div>';
+            }
+            $('#repo').append(str);      
+        },
+        error: function(xhr, textStatus, errorThrown){
+                console.log(textStatus);
+            }
+      });
+    </script>
 </body>
 
 </html>
